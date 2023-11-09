@@ -47,7 +47,7 @@ phpunit.phar
 /backend/runtime
 /backend/web/uploads/*
 !/backend/web/uploads/default.jpg
-
+/backend/assets/ckfinder/config.php
 /backend/web/assets
 
 /node_modules
