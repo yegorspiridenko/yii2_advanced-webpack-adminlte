@@ -1,9 +1,15 @@
 <?php
+/** @var View $this */
+
+use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
+use yii\web\View;
+
+$this->title = 'Авторизация';
 ?>
 <div class="card card-outline card-primary">
     <div class="card-header text-center">
-        <a href="/" class="h1"><b>Zetter Admin</b></a>
+        <a href="/" class="h1"><b><?= Yii::$app->params['appName'] ?> Admin</b></a>
     </div>
     <div class="card-body login-card-body">
         <?php $form = \yii\bootstrap4\ActiveForm::begin(['id' => 'login-form']) ?>
@@ -35,7 +41,7 @@ use yii\helpers\Html;
             </div>
         </div>
 
-        <?php \yii\bootstrap4\ActiveForm::end(); ?>
+        <?php ActiveForm::end(); ?>
 
-        <a href="/admin/password-recovery">Забыли пароль?</a><br>
+        <a href="/password-recovery">Забыли пароль?</a><br>
 </div>

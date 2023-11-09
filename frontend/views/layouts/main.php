@@ -5,8 +5,10 @@
 
 use frontend\assets\AppAsset;
 use yii\bootstrap4\Html;
+use frontend\assets\BackendAsset;
 
 AppAsset::register($this);
+$backend = BackendAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

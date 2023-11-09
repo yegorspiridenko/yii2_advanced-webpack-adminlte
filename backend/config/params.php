@@ -1,6 +1,5 @@
 <?php
 return [
-    'adminEmail' => 'admin@example.com',
     'hail812/yii2-adminlte3' => [
         'pluginMap' => [
             'sweetalert2' => [

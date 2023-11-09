@@ -44,9 +44,15 @@ phpunit.phar
 /backend/web/index.php
 /backend/web/index-test.php
 /backend/web/robots.txt
+/backend/runtime
+/backend/web/uploads/*
+!/backend/web/uploads/default.jpg
+
+/backend/web/assets
 
 /node_modules
 /backend/tests
 /common/tests
 /frontend/tests
 /frontend/assets/build
+/frontend/runtime

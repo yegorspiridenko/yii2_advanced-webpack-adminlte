@@ -11,6 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
+    'language' => 'ru',
     'modules' => [],
     'components' => [
         'request' => [
@@ -37,14 +38,24 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '/login' => '/site/login',
+                '/password-recovery' => '/site/password-recovery',
+                '/password-reset' => '/site/password-reset',
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller\w+>/<action>/<id\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>'
             ],
         ],
-        */
+        'assetManager' => [
+            'class' => 'yii\web\AssetManager',
+            'linkAssets' => false,
+            'appendTimestamp' => true,
+            'forceCopy' => YII_ENV_DEV,
+        ]
     ],
     'params' => $params,
 ];

@@ -8,56 +8,34 @@
 
 Yii 2 advanced + webpack + adminlte
 
-## Installation
-1. Clone the repository
-1. Go to the project root directory and run `composer install`
-1. Run `php init` from the project root directory and choose your desired environment
-1. Create the database
-1. Open `common/config/main-local.php`
-- Configure database credentials by changing the following lines
+## Установка
+1. Клонируем репозиторий
+2. В корне проекта устанавливаем зависимости `composer install` и `yarn install`
+4. Запускаем `php init` в корне проекта для развертки приложения
+5. Создаем базу данных
+6. В файле `common/config/main-local.php`
+- Настраиваем подключение к базе данных
     ```php
-  // If use mamp 
+  // Если используется MAMP 
   //'dsn' => 'mysql:host=localhost;dbname=your_website_db;unix_socket=/Applications/MAMP/tmp/mysql/mysql.sock',
     'dsn' => 'mysql:host=localhost;dbname=your_website_db',
     'username' => 'root',
     'password' => '',
     'charset' => 'utf8mb4',
     ```
-  - If you want to use real SMTP credentials to send emails, configure the mail provider by replacing `mailer` component with the following code
-      ```php
-      'mailer' => [
-          'class' => 'yii\swiftmailer\Mailer',
-          'transport' => [
-              'class' => 'Swift_SmtpTransport',
-              'host' => 'SMTP_HOST',
-              'username' => 'SMTP_USERNAME',
-              'password' => 'SMTP_PASSWORD',
-              'port' => 'SMTP_PORT',
-              'encryption' => 'tls',
-          ],
-      ],
-      ```
-1. Run `php yii migrate` to apply all system migrations.
+  - Также можно настроить `mailer` для отправки электронных писем в `common/config/main.php`
+  - Также можно настроить ключи для файлового менеджера, иначе он будет работать в тестовом режиме. 
+Для этого в файле `backend/assets/ckfinder/config.php` нужно указать параметры `$config['licenseName']` и `$config['licenseKey']`. 
+Для генерации этих параметров можно использовать <a href="https://charmevietnam.com/Common/CkfinderKey">этот сайт</a>, в версии указываем 3.x.x.
+Для локальной разработки нужно указать локальный домен сайта, например localhost. 
 
-2. Open `common/config/params-local.php` and replace the content with the following code
-    ```php
-    <?php
-    return [
-        'frontendUrl' => 'YOUR_FRONTEND_HOST', // Ex: http://yourwebsite.localhost
-        'vendorEmail' => 'admin@yourwebsite.com'
-    ];
-    ```
+7. Выполняем команду `php yii migrate` для применения миграций. При инициализации приложения по умолчанию создается учетка администратора:
+    логин: `admin`, пароль: `qwertydoctor`
 
-#### For Development
-Run`yarn run dev` to build the files and start watching them. This will generate unminified versions of the files
-and will generate source maps as well
 
-#### For production
-Run `yarn run prod` to build the files for production. This will generate minified files.
+#### Локальная разработка
+Для билда и отслеживания фронта запускаем команду `yarn run dev`
 
-    
-## Create admin user
-Run the following console command to create admin user. PASSWORD is optional, you can skip it and system will generate a random password
-```bash
-php yii app/create-admin-user USERNAME [PASSWORD]
-```
+#### Продакшн
+Для билда на продакшне запускаем команду `yarn run prod`.
+

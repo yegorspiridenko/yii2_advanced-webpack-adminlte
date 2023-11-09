@@ -15,12 +15,13 @@ use yii\web\IdentityInterface;
  * @property string $username
  * @property string $password_hash
  * @property string $password_reset_token
+ * @property string $password_reset_token_expired_at
  * @property string $verification_token
  * @property string $email
  * @property string $auth_key
  * @property integer $status
- * @property integer $created_at
- * @property integer $updated_at
+ * @property string $created_at
+ * @property string $updated_at
  * @property string $password write-only password
  */
 class User extends ActiveRecord implements IdentityInterface
@@ -29,6 +30,16 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => 'Логин',
+            'email' => 'Почта',
+        ];
+    }
 
     /**
      * {@inheritdoc}
@@ -41,21 +52,14 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::class,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+            [['username', 'email'], 'unique'],
+            [['username'], 'string'],
+            [['email'], 'string'],
         ];
     }
 
@@ -94,14 +98,16 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findByPasswordResetToken($token)
     {
-        if (!static::isPasswordResetTokenValid($token)) {
-            return null;
-        }
-
-        return static::findOne([
+        $user = static::findOne([
             'password_reset_token' => $token,
             'status' => self::STATUS_ACTIVE,
         ]);
+
+        if (!$user->isPasswordResetTokenValid()) {
+            return null;
+        }
+
+        return $user;
     }
 
     /**
@@ -123,13 +129,13 @@ class User extends ActiveRecord implements IdentityInterface
      * @param string $token password reset token
      * @return bool
      */
-    public static function isPasswordResetTokenValid($token)
+    public function isPasswordResetTokenValid()
     {
-        if (empty($token)) {
+        if (empty($this->password_reset_token)) {
             return false;
         }
 
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $timestamp = strtotime($this->password_reset_token_expired_at);
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
     }
@@ -193,6 +199,9 @@ class User extends ActiveRecord implements IdentityInterface
     public function generatePasswordResetToken()
     {
         $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
+        $currentDateTime = new \DateTime();
+        $currentDateTime->add(new \DateInterval("PT" . Yii::$app->params['user.passwordResetTokenExpire'] . "S"));
+        $this->password_reset_token_expired_at = $currentDateTime->format('Y-m-d H:i:s');
     }
 
     /**
@@ -209,5 +218,6 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+        $this->password_reset_token_expired_at = null;
     }
 }
