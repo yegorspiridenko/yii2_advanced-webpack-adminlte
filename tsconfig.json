@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./frontend/assets/src",
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "downlevelIteration": true
+  },
+  "include": [
+      "frontend/assets/src/**/*.tsx",
+      "frontend/assets/src/**/*.ts",
+      "frontend/assets/src/js/service/boxberry.js",
+  ]
+}

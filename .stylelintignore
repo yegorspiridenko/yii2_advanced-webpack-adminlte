@@ -1,0 +1,8 @@
+/backend
+/common
+/console
+/environments
+/node_modules
+/vendor
+/frontend/web
+/frontend/build

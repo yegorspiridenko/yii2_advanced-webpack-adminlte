@@ -1,0 +1,78 @@
+.image-list__item {
+    position: relative;
+}
+
+.delete-gallery-image {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.nav-item .nav-treeview .nav-link {
+    padding: 0.5rem 1.5rem;
+}
+
+.select2-selection__choice {
+    height: 27px;
+}
+
+.select2-search__field {
+    width: 200px!important;
+}
+
+.select2-search__field[type=search] {
+    width: 100% !important;
+}
+
+.tab-grid-create-btn {
+    position: absolute;
+    right: 16px;
+    top: 8px;
+}
+
+#sortable {
+    touch-action: none;
+}
+
+.product-title {
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.help-block {
+    color: red;
+}
+
+.order-card-header {
+    display: flex;
+    align-items: center;
+}
+
+.order-card-header-tools {
+    margin-left: 20px;
+}
+
+.hasDatepicker {
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+.hasDatepicker:focus-visible {
+    border-color: rgb(128, 189, 255);
+}
+
+.btn.disabled, .btn:disabled {
+    cursor: not-allowed !important;
+    opacity: .3 !important;
+}
+
+.form-group.no-margin {
+    margin: 0 !important;
+}
+
+.form-group.no-margin p {
+    margin-bottom: 0 !important;
+}

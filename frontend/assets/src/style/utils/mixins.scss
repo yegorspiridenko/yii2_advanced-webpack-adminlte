@@ -1,0 +1,42 @@
+@import '../base/variables';
+
+@mixin mobile {
+    @media (max-width: $tablet - 1) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: $tablet) and (max-width: $desktop-s - 1) {
+        @content;
+    }
+}
+
+@mixin desktop-s {
+    @media (min-width: $desktop-s) and (max-width: $desktop-m - 1) {
+        @content;
+    }
+}
+
+@mixin desktop-m {
+    @media (min-width: $desktop-m) and (max-width: $desktop-l - 1) {
+        @content;
+    }
+}
+
+@mixin desktop-l {
+    @media (min-width: $desktop-l) {
+        @content;
+    }
+}
+
+@mixin transition($properties...) {
+    $transition-properties: ();
+
+    @each $property in $properties {
+        $transition-properties: append($transition-properties, #{$property} .2s cubic-bezier(0.12, 0, 0.39, 0), comma);
+    }
+
+    transition: $transition-properties;
+}
+

@@ -1,0 +1,36 @@
+.category-item .category-item__action {
+    opacity: 0;
+    transition: opacity linear .2s;
+}
+
+.category-item:hover .category-item__action {
+    opacity: 1;
+}
+
+.category-item.active {
+    background-color: #007bff;
+}
+
+.category-item.active a {
+    color: #fff!important;
+}
+
+#product-list .product-group-img {
+    height: 200px;
+}
+
+#product-list .product-group-img img {
+    height: 100%;
+    object-fit: cover;
+}
+
+#product-list .card-secondary .product-group-img {
+    opacity: .5;
+}
+
+.product-card-title {
+    font-weight: bold;
+    height: 60px;
+    padding: 0 8px;
+    font-size: 18px !important;
+}
