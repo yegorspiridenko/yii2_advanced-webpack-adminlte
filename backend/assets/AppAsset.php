@@ -14,7 +14,6 @@ class AppAsset extends AssetBundle
     public $css = [
         'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css',
         'css/site.css',
-        'css/category.css',
         'fancybox/fancybox.min.css',
     ];
 

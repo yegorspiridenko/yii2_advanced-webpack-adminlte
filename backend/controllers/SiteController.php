@@ -37,7 +37,7 @@ class SiteController extends AdminBaseController
      */
     public function actionIndex()
     {
-        return $this->redirect('/order/index');
+        return $this->render('index');
     }
 
     /**
