@@ -37,4 +37,18 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
+
+    /**
+     * Экшн для страниц верстки
+     *
+     * @param $page
+     * @return string
+     */
+    public function actionStatic($page): string
+    {
+        if ($page === 'root') {
+            return $this->renderPartial('/static/' . $page);
+        }
+        return $this->render('/static/' . $page);
+    }
 }

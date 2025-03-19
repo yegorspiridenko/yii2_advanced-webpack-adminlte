@@ -15,7 +15,6 @@ class AppAsset extends AssetBundle
         'build/app.css',
     ];
     public $js = [
-        'https://points.boxberry.ru/js/boxberry.js',
         'build/bundle.js',
     ];
     public $depends = [

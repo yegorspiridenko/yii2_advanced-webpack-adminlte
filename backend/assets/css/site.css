@@ -1,11 +1,35 @@
+.image-list-wrapper {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.image-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 .image-list__item {
     position: relative;
+    margin-right: 8px;
+}
+
+.image-list__item a img {
+    cursor: pointer;
 }
 
 .delete-gallery-image {
     position: absolute;
     right: 0;
     top: 0;
+}
+
+.file-input {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 8px;
 }
 
 .nav-item .nav-treeview .nav-link {
@@ -64,10 +88,13 @@
     opacity: .3 !important;
 }
 
-.form-group.no-margin {
-    margin: 0 !important;
+.select2-selection__choice {
+    height: 27px !important;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
 }
 
-.form-group.no-margin p {
-    margin-bottom: 0 !important;
+.select2-selection__choice__remove {
+    font-family: inherit !important;
 }

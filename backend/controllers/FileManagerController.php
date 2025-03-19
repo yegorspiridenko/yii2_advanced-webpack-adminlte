@@ -36,9 +36,8 @@ class FileManagerController extends AdminBaseController
 
         return [
             'preview' => DisplayImage::widget([
-                'width' => 100,
-                'height' => 120,
-                'bgColor' => 'ffffff',
+                'width' => 85,
+                'height' => 85,
                 'image' => $url,
                 'category' => $category,
                 'returnSrc' => true

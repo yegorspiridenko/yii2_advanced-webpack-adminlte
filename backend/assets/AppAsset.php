@@ -13,8 +13,8 @@ class AppAsset extends AssetBundle
 
     public $css = [
         'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css',
-        'css/site.css',
         'fancybox/fancybox.min.css',
+        'css/site.css',
     ];
 
     public $js = [
@@ -23,9 +23,10 @@ class AppAsset extends AssetBundle
         'ckfinder/ckfinder.js',
         'fancybox/fancybox.min.js',
         'js/sortable.js',
-        'js/main.js',
+        'js/fetch.js',
         'js/fileManager.js',
         'js/ckeditor.js',
+        'js/initTabs.js',
     ];
 
     public $depends = [

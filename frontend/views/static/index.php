@@ -9,5 +9,5 @@ $bundle = AppAsset::register($this);
 
 ?>
 <main class="main-page">
-    Главгая страница
+    Главная страница
 </main >

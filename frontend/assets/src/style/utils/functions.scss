@@ -3,3 +3,11 @@
 
     @return calc($result * 1vw);
 }
+
+@function m-vw($px) {
+    @return calc(($px * 100vw) / $mobile-vw);
+}
+
+@function d-vw($px) {
+    @return calc(($px * 100vw) / $desktop-vw);
+}

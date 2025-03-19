@@ -28,7 +28,8 @@
         "phpoffice/phpspreadsheet": "^1.23",
         "ext-json": "*",
         "ext-intl": "*",
-        "ext-curl": "*"
+        "ext-curl": "*",
+        "voskobovich/yii2-many-many-behavior": "^3.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

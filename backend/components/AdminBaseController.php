@@ -2,15 +2,13 @@
 namespace backend\components;
 
 use Yii;
+use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
-use yii\helpers\Url;
 use yii\web\Controller;
 
 class AdminBaseController extends Controller
 {
     public $layout = 'main';
-    public $pageTitle = '';
-    public $smallTitle = '';
 
     /**
      * {@inheritdoc}
@@ -62,5 +60,19 @@ class AdminBaseController extends Controller
                 ]
             ]
         ];
+    }
+
+    /**
+     * Подгрузка дефолтных значений при создании новой сущности
+     *
+     * @param ActiveRecord $model
+     *
+     * @return void
+    */
+    public function loadDefaultValues(ActiveRecord $model): void
+    {
+        if ($model->isNewRecord) {
+            $model->loadDefaultValues();
+        }
     }
 }

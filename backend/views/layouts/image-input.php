@@ -1,44 +1,41 @@
 <?php
 
-/* @var $this \yii\web\View */
-/* @var $image string */
-/* @var $label string */
-/* @var $formName string */
-/* @var $rootClass string */
+/**
+ * Вьюшка кастомного инпута изображений
+ *
+ * @var $this View
+ * @var $label string
+ * @var $formName string
+ * @var $rootClass string
+ * @var $isMultiple null|boolean
+ * @var $images array
+*/
 
-use pavlinter\display\DisplayImage;
 use yii\web\View;
 
 $label = $label ?? 'Изображение';
 $rootClass = $rootClass ?? null;
+$isMultiple = !empty($isMultiple);
 
 $this->registerJs(
-    "initImageSelector('" . $formName . "', '" . $rootClass . "');",
+    "initImageSelector('" . $formName . "', '" . $rootClass . "', '" . $isMultiple . "');",
     View::POS_READY
 );
 ?>
 <div class="form-group">
-    <label class="control-label"><?= $label ?> (PNG, JPG)</label>
-    <div class="d-flex align-items-center">
-        <div class="image-list <?= $rootClass ?>">
-            <?php if ($image) : ?>
-                <div class="image-list__item mr-4">
-                    <a data-fancybox="gallery" data-src="<?= $image ?>">
-                        <?= DisplayImage::widget([
-                            'width' => 120,
-                            'height' => 120,
-                            'image' => $image,
-                            'category' => 'all'
-                        ]) ?>
-                    </a>
-                    <input type="hidden" name="<?= $formName?>" value="<?= $image ?>">
-                    <div class="delete-gallery-image <?= $rootClass ?> btn btn-sm btn-danger">
-                        <i class="fas fa-trash"></i>
-                    </div>
-                </div>
+    <label class="control-label"><?= $label ?></label>
+    <div class="image-list-wrapper">
+        <div class="image-list <?= $rootClass ?>" id="sortable-<?= $rootClass ?>">
+            <?php if (!empty($images)) : ?>
+                <?php foreach ($images as $image): ?>
+                    <?= $this->render('image-preview', [
+                        'image' => $isMultiple ? $image->url : $image,
+                        'formName' => $formName,
+                        'rootClass' => $rootClass
+                    ]) ?>
+                <?php endforeach; ?>
             <?php endif; ?>
         </div>
-
-        <div class="btn btn-primary add-image <?= $rootClass ?>">Добавить изображение</div>
+        <div class="btn btn-primary add-image <?= $rootClass ?>">Добавить</div>
     </div>
 </div>

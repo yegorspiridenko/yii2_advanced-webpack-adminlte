@@ -1,6 +1,10 @@
-function initImageSelector(attributeName, rootClass = null, singleSelect = true) {
+function initImageSelector(attributeName, rootClass = null, isMultipleSelect = false) {
     $('body').on('click', `.add-image${rootClass ? `.${rootClass}` : ''}`, openImageSelector);
     $('body').on('click', `.delete-gallery-image${rootClass ? `.${rootClass}` : ''}`, deleteGalleryImage);
+
+    if (isMultipleSelect) {
+        Sortable.create(document.getElementById(`sortable-${rootClass}`));
+    }
 
     function openImageSelector() {
         CKFinder.popup({
@@ -12,7 +16,9 @@ function initImageSelector(attributeName, rootClass = null, singleSelect = true)
     }
 
     function onFilesChoose(evt) {
-        const selectedImages = evt.data.files.map((file) => file.getUrl());
+        const selectedImages = evt.data.files.map((file) => {
+            return file.getUrl()
+        });
 
         setImageField(selectedImages);
     }
@@ -37,12 +43,12 @@ function initImageSelector(attributeName, rootClass = null, singleSelect = true)
         const previewSrc = data.preview;
         const src = data.image;
         const liElement = $(`
-            <div class="image-list__item mr-4 ui-state-default">
+            <div class="image-list__item">
                 <a data-fancybox="gallery" data-src="${src}">
                     <img src="${previewSrc}">
                 </a>
                 <input type="hidden" name="${attributeName}" value="${src}">
-                <div class="delete-gallery-image ${rootClass ? `${rootClass}` : ''} btn btn-sm btn-danger">
+                <div class="delete-gallery-image ${rootClass ? `${rootClass}` : ''} btn btn-xs btn-danger">
                     <i class="fas fa-trash"></i>
                 </div>
             </div>
@@ -50,10 +56,42 @@ function initImageSelector(attributeName, rootClass = null, singleSelect = true)
 
         const imageList = $(`.image-list${rootClass ? `.${rootClass}` : ''}`);
 
-        if (singleSelect) {
-            imageList.html(liElement);
-        } else {
+        if (isMultipleSelect) {
             imageList.append(liElement);
+        } else {
+            imageList.html(liElement);
         }
+    }
+}
+
+function initFileSelector(attributeName, rootClass = null) {
+    $('body').on('click', `.add-file${rootClass ? `.${rootClass}` : ''}`, openFileSelector);
+    $('body').on('click', `.delete-file${rootClass ? `.${rootClass}` : ''}`, deleteFile);
+
+    function openFileSelector() {
+        CKFinder.popup({
+            chooseFiles: true,
+            onInit(finder) {
+                finder.on('files:choose', onFilesChoose);
+            },
+        });
+    }
+
+    function onFilesChoose(evt) {
+        const selectedImages = evt.data.files.map((file) => file.getUrl());
+
+        setFileField(selectedImages);
+    }
+
+    function deleteFile() {
+        $(this).siblings(`input[name="${attributeName}"]`).val(null);
+    }
+
+    function setFileField(allFiles) {
+        allFiles.forEach((fileUrl) => handleFileData(fileUrl));
+    }
+
+    function handleFileData(src) {
+        $(`.${rootClass} input[name="${attributeName}"]`).val(src);
     }
 }
